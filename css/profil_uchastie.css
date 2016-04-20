@@ -1,0 +1,116 @@
+@font-face {
+    font-family: muriadPro; 
+    src: url("../font/8143.otf"); 
+   }
+section.internet-konk .sect-bot-l {
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+.container-flex, #min, #small {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.small-w, .small-m {
+    flex-basis: 189px;
+    max-width: 208px;
+    height: 190px;
+    background-size: cover;
+    position: relative;
+    margin: 4px;
+}
+.small-w{
+    background-image: url("../img/woom.jpg");
+
+}
+.small-m{
+    background-image: url("../img/man.jpg");
+}
+a.like
+{
+    background-color: #fff;
+    opacity: 0.7;
+    position: absolute;
+    top: 155px;
+    right: 25px;
+    color: black;
+    padding: 2px 20px 2px 15px;
+    font-size: 15px;
+}
+a.like img{
+    width: 35px;
+    background-size: cover;
+    position: absolute;
+    top: -6px;
+    right: -20px;
+}
+#min {
+    width: 50%;    
+}
+#small{
+    width: 50%;
+    height: -3px;
+}
+
+.big-w, .big-m{
+    width: 48.7%;
+    height: 390px;
+    background-size: cover;
+    margin: 5px;
+    position: relative;
+}
+.big-m{
+    background-image: url("../img/man.jpg");
+}
+.big-w{
+    background-image: url("../img/woom.jpg");
+}
+.big-m a.like, .big-w a.like
+{
+    background-color: #fff;
+    opacity: 0.7;
+    position: absolute;
+    top: 329px;
+    right: 25px;
+    color: black;
+    padding: 5px 45px 6px 15px;
+    font-size: 15px;
+}
+.big-m a.like img, .big-w a.like img{
+    width: 55px;
+    background-size: cover;
+    position: absolute;
+    top: -13px;
+    right: -20px;
+}
+h3.loading
+{
+    text-align: center;
+    font-size: 30px;
+    font-weight: normal;
+    font-family: 'muriadPro';
+}
+
+.small-w-activ p{
+     font-family: 'muriadPro';
+    margin: 0;
+     font-size: 13px;
+}
+.small-w-activ h2{
+     font-family: 'muriadPro';
+    margin: 10px 0;
+}
+.small-w-activ p span{
+     font-family: 'muriadPro';
+     font-size: 25px;
+}
+.small-w-activ{
+    flex-basis: 317px;
+    max-width: 180px;
+    height: 190px;
+    background-size: cover;
+    position: relative;
+    margin: 4px;
+    background-color: #fff;   
+}

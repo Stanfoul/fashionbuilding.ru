@@ -1,0 +1,200 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: muriadPro; 
+    src: url("../font/8143.otf"); 
+   }
+.poster{
+    border: 3px solid rgba(107, 107, 107, 0.3);
+    width: 791px;
+    padding: 30px 0;
+    display: block;
+    margin: 40px auto;
+}
+.poster div{
+    display: inline-block;
+    vertical-align: top;
+}
+.right_part{
+    width: 50%;
+    text-align: center;
+}
+.left_part
+{
+    width: 49%;
+}
+.image_poster
+{
+    background-image: url("../img/post.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 99%;
+    height: 215px;
+    text-align: center;
+    font-family: 'muriadPro';
+    font-size: 20px;
+    font-weight: 100;
+}
+.image_poster p{
+    width: 100%;
+    height: 212px;
+    background-color: #fff;
+    font-size: 32px;
+    text-align: center;
+    line-height: 215px;
+    box-shadow: -5px 2px 25px rgba(0, 0, 0, 0.4), 5px -2px 25px rgba(0, 0, 0, 0.4);
+    margin: 15px 30px;
+}
+.title
+{
+    text-align: center;
+    font-family: 'muriadPro';
+    margin-bottom: 10px;
+    font-size: 21px;
+    font-weight: normal;
+    margin-left: 54px;
+}
+.title>span
+{
+   font-size: 30px; 
+}
+.right_part p, .right_part h3{
+    margin: 0px 0 15px 68px;
+    text-align: center;
+    font-size: 14px;
+}
+.right_part p span{
+    color: red;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+}
+.right_part h3{
+    margin: 11px 0 40px 80px;
+    font-family: 'muriadPro';
+    font-weight: normal;
+    font-size: 19px;
+}
+.poster>.map
+{
+    display: block;
+    margin: 0 auto;
+    width: 95%;
+
+}
+.adress{
+    margin: 45px 0px 30px 35px;
+}
+.page
+{
+    background-image: url("../img/sect-bg.jpg");
+    padding: 20px;
+}
+
+.thumb-block {
+    width: 791px;
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 30px;
+    border: 3px solid rgba(107, 107, 107, 0.3);
+ }
+.thumb-block a:first-child
+{
+    margin: 10px 0 10px 25px;
+}
+.thumb-block a:last-child
+{
+    margin: 10px 25px 10px 0;
+}
+   .thumb-block a.thumb {
+      display: block;
+      width: 90px;
+      transition: 200ms ease-in-out;
+      height: 90px; 
+       margin-bottom: 10px;
+       margin-top: 10px;
+        
+    }
+      .thumb-block a.thumb:hover {
+        -webkit-transform: scale(1.14);
+                transform: scale(1.14); }
+   .subscribe {
+        border-radius: 5px;
+        margin-top: 30px;
+        border: 3px solid rgba(107, 107, 107, 0.3);
+        width: 791px;
+        margin: 15px auto;    
+    }
+    .subscribe p {
+        margin: 10px;
+        width: 64%;
+      font-size: 14px;
+      color: #6e1f22; }
+    .subscribe .sub-block {
+        margin-right: 25px;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center; }
+     .subscribe .sub-block input {
+        background-color: #6e1f22;
+        height: 30px;
+        line-height: 30px;
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.1); }
+        .subscribe .sub-block input:focus {
+          outline: none; }
+      .subscribe .sub-block input[type="button"] {
+        font-size: 15px;
+        line-height: 32px;
+        letter-spacing: 3px;
+        padding: 0px 5px;
+        height: 32px;
+        margin-left: 6px; }
+      .subscribe .sub-block input[type="tel"] {
+        max-width: 270px;
+        padding-left: 10px; }
+.block-desc {
+    border-radius: 5px;
+    margin-top: 30px;
+    font-size: 48px;
+    border: 3px solid rgba(107, 107, 107, 0.3);
+    width: 791px;
+    margin: 0 auto;
+}
+    .block-desc .desssc {
+      max-width: 80%;
+      margin: 0 auto;
+      margin-top: 40px;
+      text-align: center;
+      letter-spacing: 10px;
+      margin-bottom: 20px; 
+      font-size: 40px;
+}
+    .block-desc .video-block {
+      width: 370px;
+      height: 165px;
+      margin: 0 auto;
+      line-height: 165px;
+      background-color: #6979b8;
+      text-align: center;
+      margin-bottom: 30px;
+      letter-spacing: 10px; }
+    .block-desc a.comments {
+      display: inline-block;
+      float: right;
+      text-align: right;
+      color: #000;
+      font-size: 18px;
+      padding-right: 55px;
+      letter-spacing: 3px; }
+    .block-desc .end-line {
+      clear: both;
+      width: 100%;
+      height: 10px;
+      background-color: rgba(0, 0, 0, 0.5); 
+    }

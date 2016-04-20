@@ -1,0 +1,100 @@
+.modalDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    /*display: none;*/
+    display: none;
+    pointer-events: none;
+}
+
+.modalDialog:target {
+    display: block;
+    pointer-events: auto;
+}
+.flex-images
+{
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 120px;
+}
+
+.modalDialog > div.cont-modal {
+    text-align: center;
+    font-size: 13px;
+    font-family: 'muriadPro';
+    width: 60%;
+    position: relative;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    background: #fff;
+    border: 2px solid #6b6b6b;
+    padding-bottom: 30px;
+}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover { background: black; }
+.item-modal, .adding{
+    flex-basis: 130px;
+    max-width: 130px;
+    height: 130px;
+    background-size: cover;
+    position: relative;
+    margin: 5px;
+}
+.item-modal{
+    background-image: url("../img/woom.jpg");
+}
+.adding{
+    background-color: #e6e6e6;
+}
+.adding a{
+    color: black;
+    position: absolute;
+    width: 80%;
+    left: 15px;
+    top: 40px;
+}
+.item-modal a.like{
+    padding: 0;
+    top: 100px;
+}
+a.closed
+{
+    position: absolute;
+    right: 3px;
+    top: 2px;
+}
+a.uchastie{
+    color: #fff;
+    padding: 18px 52px;
+    background-size: cover;
+    font-size: 22px;
+    font-family: 'muriadPro';
+    background-image: url("../img/sect-prim.png");
+}

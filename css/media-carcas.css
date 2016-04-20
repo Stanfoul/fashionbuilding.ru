@@ -1,0 +1,102 @@
+/*==========  Desktop First Method  ==========*/
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 955px) {
+    header.home-head .head-line,
+    .city
+    {
+        width: 90%;
+    }
+    
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	    header.home-head .head-line,
+    .city
+    {
+        width: 96%;
+    }
+}
+@media only screen and (max-width : 680px) 
+{
+header.home-head .head-line
+    {
+        width: 100%;
+        padding-top: 40px;
+        background: none;
+        border: none;
+    }
+    .city h1
+    {
+       display: none;
+    }
+    nav.home-nav{
+        position: relative;
+    } 
+    .p_account
+    {
+        position: absolute;
+        top: 50px;
+        left: 15%;
+    }
+    .message
+    {
+        position: absolute;
+        top: 50px;
+        right: 5%;
+    }
+    .logo
+    {
+        margin-left: 20%;
+    }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 425px) {
+    .logo
+    {
+        margin-left: 10%;
+    }
+}
+/*-----------------------*/
+@media only screen and (max-width : 375px) {
+	header.home-head
+    {
+        padding-bottom: 90px;
+        background-size: cover;
+    }
+    .logo
+    {
+        margin-left: 5%;
+    }
+    .p_account
+    {
+        top: 60px;
+        left: 33%;
+    }
+    .message
+    {
+        top: 90px;
+        right: 19%;
+    }
+}
+
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 325px) {
+	.logo
+    {
+        margin-left: -4%;
+    }
+    .p_account
+    {
+        top: 60px;
+        left: 33%;
+    }
+    .message
+    {
+        top: 90px;
+        right: 20%;
+    }
+}
+

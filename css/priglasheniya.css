@@ -1,0 +1,383 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: muriadPro; 
+    src: url("../font/8143.otf"); 
+   }
+section.date-place {
+  padding: 100px 0 120px 0;
+  background-image: url(../img/sect-bg.jpg); }
+  section.date-place .block-date {
+    border-radius: 5px;
+    margin-top: 30px;
+    border: 3px solid rgba(107, 107, 107, 0.3); }
+    section.date-place .block-date .date-t {
+      padding: 20px 0 40px 40px;
+      font-size: 32px; }
+      section.date-place .block-date .date-t span {
+        font-size: 53px; }
+    section.date-place .block-date .date-line {
+      position: relative;
+      border-top: 2px solid #6b6b6b;
+      border-bottom: 2px solid #6b6b6b;
+      padding: 5px 0 8px;
+      background-color: rgba(0, 0, 0, 0.7); }
+      section.date-place .block-date .date-line .right {
+        right: 10px;
+        background-image: url(../img/right.png);
+        background-size: contain; }
+      section.date-place .block-date .date-line .left {
+        left: 10px;
+        background-image: url(../img/left.png);
+        background-size: contain; }
+      section.date-place .block-date .date-line .left, section.date-place .block-date .date-line .right {
+        width: 17px;
+        margin-top: -5px;
+        height: 17px;
+        top: 43%;
+        position: absolute; }
+        section.date-place .block-date .date-line .left:hover, section.date-place .block-date .date-line .right:hover {
+          cursor: pointer; }
+      section.date-place .block-date .date-line ul {
+        width: 96%;
+        margin: 0 auto;
+        text-align: center; }
+        section.date-place .block-date .date-line ul li {
+          text-transform: lowercase;
+          display: inline-block;
+          color: #fff;
+          margin-right: 2px; }
+          section.date-place .block-date .date-line ul li:last-child {
+            margin-right: 0px; }
+          section.date-place .block-date .date-line ul li span {
+            display: block;
+            font-size: 18px; }
+        section.date-place .block-date .date-line ul li.red {
+          color: #ff0000; }
+    section.date-place .block-date .line-desc {
+      margin-top: 45px;
+      padding: 0 30px; }
+      section.date-place .block-date .line-desc .line-item {
+        width: 170px;
+        box-shadow: -5px 2px 13px rgba(0, 0, 0, 0.4), 5px -2px 13px rgba(0, 0, 0, 0.4);
+        background-color: #FFF;
+        height: 90px; }
+        section.date-place .block-date .line-desc .line-item:hover, section.date-place .block-date .line-desc .line-item .active {
+          cursor: default;
+          box-shadow: -5px 2px 13px rgba(0, 0, 0, 0.4), 5px -2px 13px rgba(0, 0, 0, 0.4), 0px 0px 0px 1px #ff0000; }
+        section.date-place .block-date .line-desc .line-item .name {
+          font-size: 24px;
+          text-align: center;
+          line-height: 90px; }
+        section.date-place .block-date .line-desc .line-item .desc {
+          letter-spacing: 1px;
+          margin-top: 5px;
+          text-align: center;
+          font-size: 16px; }
+      section.date-place .block-date .line-desc .li1 .name, section.date-place .block-date .line-desc .li2 .name {
+        padding-left: 50px; }
+    section.date-place .block-date .sec-line {
+      margin-bottom: 75px;
+      margin-top: 110px;
+      padding: 0 70px; }
+      section.date-place .block-date .sec-line .price {
+        width: 40%;
+        text-align: center; }
+        section.date-place .block-date .sec-line .price .oplatit {
+          display: none;
+          height: 215px;
+          position: relative; }
+          section.date-place .block-date .sec-line .price .oplatit .main-opl {
+            width: 100%;
+            left: 0;
+            bottom: 100px;
+            position: absolute;
+            padding: 10px 0;
+            border-radius: 2px;
+            box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.7), 0px 0px 0px 3px rgba(246, 62, 62, 0.9);
+            background-color: #ffad42; }
+            section.date-place .block-date .sec-line .price .oplatit {
+          display: none;
+          height: 215px;
+          position: relative; }
+          section.date-place .block-date .sec-line .price .oplatit .main-opl {
+            width: 100%;
+            left: 0;
+            bottom: 100px;
+            position: absolute;
+            padding: 10px 0;
+            border-radius: 2px;
+            box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.7), 0px 0px 0px 3px rgba(246, 62, 62, 0.9);
+            background-color: #ffad42; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl .stoim {
+              font-size: 21px;
+              letter-spacing: 2px;
+              margin-bottom: 20px; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl span.lp {
+              display: block;
+              font-size: 18px;
+              text-decoration: line-through; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl span.np {
+              display: block;
+              font-size: 28px;
+              margin-bottom: 15px; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl .col-vo {
+              font-size: 17px;
+              letter-spacing: 2px; }
+              section.date-place .block-date .sec-line .price .oplatit .main-opl .col-vo .less:hover, section.date-place .block-date .sec-line .price .oplatit .main-opl .col-vo .more:hover {
+                cursor: pointer; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl .summ {
+              font-size: 18px;
+              text-align: left;
+              padding-left: 20px; }
+              section.date-place .block-date .sec-line .price .oplatit .main-opl .summ span.numb {
+                font-size: 30px; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl .sposob {
+              -webkit-align-items: center;
+                  -ms-flex-align: center;
+                      align-items: center;
+              padding: 0 20px;
+              margin-top: 15px; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl .spos-opl h3 {
+              line-height: 1;
+              margin: 0;
+              margin-bottom: 5px;
+              text-align: left;
+              font-weight: normal;
+              font-size: 18px; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl .spos-opl ul li {
+              font-size: 14px;
+              text-align: left; }
+              section.date-place .block-date .sec-line .price .oplatit .main-opl .spos-opl ul li label {
+                margin-left: 5px;
+                cursor: pointer; }
+              section.date-place .block-date .sec-line .price .oplatit .main-opl .spos-opl ul li input[type="radio"] {
+                padding-left: 5px;
+                cursor: pointer; }
+                section.date-place .block-date .sec-line .price .oplatit .main-opl .spos-opl ul li input[type="radio"]:focus {
+                  outline: none; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl a.subm {
+              border: 1px solid #ff0000;
+              width: 85px;
+              height: 85px;
+              color: #000;
+              font-size: 14px;
+              line-height: 80px;
+              background-color: #ff9811; }
+            section.date-place .block-date .sec-line .price .oplatit .main-opl p.after {
+              font-size: 14px;
+              max-width: 285px;
+              margin: 0 auto;
+              margin-top: 15px;
+              padding: 5px 0;
+              background-color: #ffc477; }
+          section.date-place .block-date .sec-line .price .oplatit .svernut {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin-top: 18px;
+            width: 103%;
+            color: #000;
+            font-size: 24px;
+            letter-spacing: 4px;
+            display: inline-block;
+            padding: 27px 0;
+            background-color: #ffad42;
+            border-radius: 2px;
+            box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.7), 0px 0px 0px 3px rgba(246, 62, 62, 0.9); }
+            section.date-place .block-date .sec-line .price .oplatit .svernut:hover {
+              cursor: pointer;
+              color: rgba(0, 0, 0, 0.9); }
+        section.date-place .block-date .sec-line .price .stoim-wrap {
+          background-color: rgba(255, 255, 255, 0.2);
+          height: 215px;
+          box-shadow: -5px 2px 13px rgba(0, 0, 0, 0.4), 5px -2px 13px rgba(0, 0, 0, 0.4); }
+          section.date-place .block-date .sec-line .price .stoim-wrap .stoim {
+            font-size: 21px;
+            letter-spacing: 2px;
+            margin-bottom: 20px; }
+          section.date-place .block-date .sec-line .price .stoim-wrap span {
+            display: block; }
+          section.date-place .block-date .sec-line .price .stoim-wrap span.lp {
+            font-size: 18px;
+            text-decoration: line-through; }
+          section.date-place .block-date .sec-line .price .stoim-wrap span.np {
+            font-size: 28px;
+            margin-bottom: 15px; }
+          section.date-place .block-date .sec-line .price .stoim-wrap .buynow {
+            margin-top: 18px;
+            width: 100%;
+            color: #000;
+            font-size: 24px;
+            letter-spacing: 4px;
+            display: inline-block;
+            padding: 27px 0;
+            background-color: #ffad42;
+            border-radius: 2px;
+            box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.7), 0px 0px 0px 3px rgba(246, 62, 62, 0.9); }
+            section.date-place .block-date .sec-line .price .stoim-wrap .buynow:hover {
+              cursor: pointer;
+              color: rgba(0, 0, 0, 0.9); }
+      section.date-place .block-date .sec-line .afisha {
+        width: 44%;
+        height: 215px;
+        background-color: #fff;
+        font-size: 32px;
+        text-align: center;
+        line-height: 215px;
+        box-shadow: -5px 2px 25px rgba(0, 0, 0, 0.4), 5px -2px 25px rgba(0, 0, 0, 0.4); }
+  section.date-place .block-desc {
+    border-radius: 5px;
+    margin-top: 30px;
+    font-size: 48px;
+    border: 3px solid rgba(107, 107, 107, 0.3); }
+    section.date-place .block-desc .desssc {
+      max-width: 80%;
+      margin: 0 auto;
+      margin-top: 40px;
+      text-align: center;
+      letter-spacing: 10px;
+      margin-bottom: 20px; 
+      font-size: 37px;
+}
+    section.date-place .block-desc .video-block {
+      width: 370px;
+      height: 165px;
+      margin: 0 auto;
+      line-height: 165px;
+      background-color: #6979b8;
+      text-align: center;
+      margin-bottom: 30px;
+      letter-spacing: 10px; }
+    section.date-place .block-desc a.comments {
+      display: inline-block;
+      float: right;
+      text-align: right;
+      color: #000;
+      font-size: 18px;
+      padding-right: 55px;
+      letter-spacing: 3px; }
+    section.date-place .block-desc .end-line {
+      clear: both;
+      width: 100%;
+      height: 10px;
+      background-color: rgba(0, 0, 0, 0.5); }
+  section.date-place .thumb-block {
+    border-radius: 5px;
+    margin-top: 30px;
+    border: 3px solid rgba(107, 107, 107, 0.3);
+    padding: 10px 30px; }
+    section.date-place .thumb-block a.thumb {
+      display: block;
+      width: 80px;
+      transition: 200ms ease-in-out;
+      height: 90px; }
+      section.date-place .thumb-block a.thumb:hover {
+        -webkit-transform: scale(1.14);
+                transform: scale(1.14); }
+  section.date-place .subscribe {
+    border-radius: 5px;
+    margin-top: 30px;
+    border: 3px solid rgba(107, 107, 107, 0.3);
+    padding: 15px 15px; }
+    section.date-place .subscribe p {
+      margin: 0;
+      max-width: 540px;
+      font-size: 14px;
+      color: #6e1f22; }
+    section.date-place .subscribe .sub-block {
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      section.date-place .subscribe .sub-block input {
+        background-color: #6e1f22;
+        height: 30px;
+        line-height: 30px;
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.1); }
+        section.date-place .subscribe .sub-block input:focus {
+          outline: none; }
+      section.date-place .subscribe .sub-block input[type="button"] {
+        font-size: 15px;
+        line-height: 32px;
+        letter-spacing: 3px;
+        padding: 0px 5px;
+        height: 32px;
+        margin-left: 6px; }
+      section.date-place .subscribe .sub-block input[type="tel"] {
+        max-width: 270px;
+        padding-left: 10px; }
+.poster{
+    border: 3px solid rgba(107, 107, 107, 0.3);
+    max-width: 791px;
+    padding: 30px 0;
+    display: block;
+    margin: 40px auto;
+}
+.poster div{
+    display: inline-block;
+    vertical-align: top;
+}
+.right_part{
+    width: 50%;
+    text-align: left;
+}
+.left_part
+{
+    width: 49%;
+}
+.image_poster
+{
+    background-image: url("../img/post.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 99%;
+    height: 215px;
+    text-align: center;
+    font-family: 'muriadPro';
+    font-size: 20px;
+    font-weight: 100;
+}
+.image_poster p{
+   width: 100%;
+height: 212px;
+background-color: #fff;
+font-size: 32px;
+text-align: center;
+line-height: 215px;
+box-shadow: -5px 2px 25px rgba(0, 0, 0, 0.4), 5px -2px 25px rgba(0, 0, 0, 0.4);
+margin: 15px 30px;
+}
+.title
+{
+    text-align: center;
+    font-family: 'muriadPro';
+    margin-bottom: 10px;
+    font-size: 21px;
+    font-weight: normal;
+    margin-left: 50px;
+}
+.title>span
+{
+   font-size: 35px; 
+}
+.right_part p, .right_part h3{
+    margin: 0 0 30px 80px;
+    text-align: left;
+    font-size: 12px;
+}
+.right_part p span{
+    color: red;
+    font-size: 18px;
+}
+.right_part h3{
+    margin: 10px 0 30px 80px;
+    font-family: 'muriadPro';
+    font-weight: normal;
+    font-size: 21px;
+}
