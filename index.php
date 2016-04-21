@@ -1,3 +1,97 @@
+<?php
+	require_once("main_php/conect.php"); //ПОДКЛЮЧЕННИЕ БАЗЫ
+	function alert($string)
+{
+    print '<script type="text/javascript">alert("' . $string . '");</script>';
+}
+function gen_salt(){  //ФУНКЦИЯ ГЕНЕРАЦИИ СОЛИ ДЛЯ ШИФРОВАНИЯ ПАРОЛЯ
+	$salt='';
+	$symbols='0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+	for ($i=0;$i<8;$i++){
+		$salt=$salt.substr($symbols,rand(0,61),1);
+	}
+	$salt='$1$'.$salt.'$';
+	return $salt;
+}
+function gen_hash(){ //ФУНКЦИЯ ГЕНЕРАЦИИ ХЭША
+	$salt='';
+	$symbols='0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+	for ($i=0;$i<8;$i++){
+		$salt=$salt.substr($symbols,rand(0,61),1);
+	}
+	$salt='$1$'.$salt.'$';
+	$hash=$_SERVER['REMOTE_ADDR'];
+	$hash=crypt($hash,$salt);
+	return $hash;
+}
+if(isset($_POST['button0'])){ //ПО КНОПКЕ ВОЙТИ
+if(($_POST['login']!="")&&($_POST['pass']!="")){
+	$on='0';
+	$pass=$_POST['pass'];
+	$login=$_POST['login'];
+	$query=("SELECT * FROM `log` WHERE login LIKE '".$login."'");
+	$hash=gen_hash();
+	if($result=$mysqli->query($query)){
+		while($obj=$result->fetch_object()){
+			if (($obj->login==$_POST['login'])&&(hash_equals($obj->pass, crypt($pass, $obj->pass)))){
+				if(!$mysqli->query("UPDATE `log` SET `hash`='{$hash}' WHERE `log`.`login` ='{$login}'")){
+					print "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
+				}
+				alert('in');
+				setcookie("id",$obj->user_id);
+				setcookie("h",$hash);
+				header("Location:profil.php");
+				exit();
+				$on='1';
+			}else if($on=='0'){
+				alert("Неверный логин/пароль");
+				$on='1';
+			}
+		}
+		if(($result->fetch_object()==null)&&($on=='0')){
+			alert("Неверный логин/пароль");
+			$on='1';
+		}
+	}
+}else{
+	alert("Введите все данные");
+}
+}
+if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТЬСЯ
+	$brik='1';
+	if(($_POST['login1']!="")&&($_POST['pass1']!="")&&($_POST['pass_check']!="")){
+		$login1=$_POST['login1'];
+		$query=("SELECT * FROM `log` WHERE login LIKE '".$login1."'");
+		if($result=$mysqli->query($query)){
+			while($obj=$result->fetch_object()){
+				alert('Такой логин уже существует');
+				header("Refresh:0");
+				exit;
+			}
+			if(($result->fetch_object()==null)){
+				$brik='0';
+			}
+		}
+		if ($_POST['pass1']==$_POST['pass_check']){
+			$brik='1';
+			$login1=$_POST['login1'];
+			$pass1=$_POST['pass1'];
+			$pass1 = crypt($pass1,gen_salt());
+			$hash=gen_hash();
+			if(!$mysqli->query("CREATE TABLE IF NOT EXISTS log(user_id int NOT NULL AUTO_INCREMENT, login TEXT,pass TEXT,hash TEXT,grup TEXT , PRIMARY KEY (user_id))") ||
+			!$mysqli->query("INSERT INTO log VALUES('0', '{$login1}' , '{$pass1}' , '{$hash}', 'stud' )")) {
+				print "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
+			}
+			print '<script type="text/javascript">showlog(1);</script>';
+		}else{
+			alert("Пароли не совпадают");
+		}
+	}else{
+		alert("Введите все данные");
+	}
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +118,23 @@
 					<div class="drop-down-log">
 						<ul class="personal-cab">
 							<div class="dropdown_arr"></div>
-	     	<li><input type="text" placeholder="Номер телефона/E-mail"></li>
-	     	<li><input type="password" placeholder="Пароль"></li>
-	     	<li><input type="button" value="Вход/Регистрация"></li>
+								<div id="login">
+									<form method="POST">
+										<li><input type="text" id="login" name="login" placeholder="Номер телефона/E-mail"></li>
+										<li><input type="password" id="pass" name="pass" placeholder="Пароль"></li>
+										<li><input type="submit" name="button0" value="Войти"></li>
+										<li><input type="button" onclick="showlog('0')" value="Регистрация"></li>
+									</form>
+								</div>
+								<div id="register" style="display:none">
+									<form method="POST">
+										<li><input type="text" id="login" name="login1" placeholder="Номер телефона/E-mail"></li>
+										<li><input type="password" id="pass" name="pass1" placeholder="Пароль"></li>
+										<li><input type="password" id="pass" name="pass_check" placeholder="Повторите пароль"></li>
+										<li><input type="submit" name="button1" value="Зарегистрироваться"></li>
+									<li><input type="button" onclick="showlog('1')" value="Вход"></li>
+								</form>
+							</div>
 	     </ul>
     	</div>
      <!-- dropdown end -->

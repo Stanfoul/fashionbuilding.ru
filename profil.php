@@ -1,3 +1,25 @@
+<?php
+require_once("main_php/conect.php");
+function alert($string)
+{
+    print '<script type="text/javascript">alert("' . $string . '");</script>';
+}
+if (isset($_COOKIE['id'])){
+	$query="SELECT hash FROM `log` WHERE user_id LIKE '".$_COOKIE['id']."' " ;
+	if($result=$mysqli->query($query)){
+		while($obj=$result->fetch_object()){
+			if((!hash_equals($obj->hash,$_COOKIE['h']))||(hash_equals($obj->hash,crypt($_SERVER['REMOTE_ADDR'],$obj->hash)))){
+				alert('successfull in');
+			}else{
+				header("Location:main_php/clear.php");
+			}
+		}
+	}
+}
+if (isset($_POST['button1'])){
+	header("Location:main_php/clear.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +45,7 @@
             <div class="peppol">
                 <img src="img/icon-people.png">
             </div>
-            <div class="logo"><a href="index.html"><img src="img/logo.png" alt="fashion"></a></div>
+            <div class="logo"><a href="index.php"><img src="img/logo.png" alt="fashion"></a></div>
             <ul class="message">
                 <li class="prigl"><a class="mb" href="#">Приглашения (<span class="count">0</span>)</a>
                 <div class="locpr">
