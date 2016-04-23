@@ -118,9 +118,9 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 					<div class="drop-down-log">
 						<ul class="personal-cab">
 							<div class="dropdown_arr"></div>
-								<div id="login">
+								<div id="log">
 									<form method="POST">
-										<li><input type="text" id="login" name="login" placeholder="Номер телефона/E-mail"></li>
+										<li><input type="text" class="login" name="login" placeholder="Номер телефона/E-mail"></li>
 										<li><input type="password" id="pass" name="pass" placeholder="Пароль"></li>
 										<li><input type="submit" name="button0" value="Войти"></li>
 										<li><input type="button" onclick="showlog('0')" value="Регистрация"></li>
@@ -128,7 +128,7 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 								</div>
 								<div id="register" style="display:none">
 									<form method="POST">
-										<li><input type="text" id="login" name="login1" placeholder="Номер телефона/E-mail"></li>
+										<li><input type="text" class="login" name="login1" placeholder="Номер телефона/E-mail"></li>
 										<li><input type="password" id="pass" name="pass1" placeholder="Пароль"></li>
 										<li><input type="password" id="pass" name="pass_check" placeholder="Повторите пароль"></li>
 										<li><input type="submit" name="button1" value="Зарегистрироваться"></li>
@@ -358,7 +358,7 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 		<div class="subscribe flex space--between">
 			<p class="text">Оставьте свой номер телефона, чтобы получать смс уведомления за несколько дней до начала мероприятий</p>
 			<div class="sub-block flex">
-				<input type="tel" value="+7(---)-------">
+				<input type="tel" class="login">
 				<input type="button" value="Ок">
 			</div>
 		</div>
@@ -367,5 +367,21 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="js/app.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="js/jquery.inputmask.js"></script>
+    <script>
+	function showlog(val){
+		if (val==1){
+			document.getElementById('log').style.display="block";
+			document.getElementById('register').style.display="none";
+		}else{
+			document.getElementById('log').style.display="none";
+			document.getElementById('register').style.display="block";
+		}
+	}
+	$(document).ready(function() {
+	$(".login").inputmask("+7(999)-999-99-99",{ "placeholder": "_" });
+   });
+	</script>
 </body>
 </html>

@@ -1,5 +1,44 @@
-
-
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 346%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+.button-link { 
+    text-decoration: none;
+   }
+ .button-link:hover { 
+    text-decoration: underline;
+   }
+.close{
+	font-weight: bold;
+	font-size: 1.25em;
+	padding-left:150px;
+	color: #333;
+}
+.close:hover{
+	color: #666;
+	cursor: pointer;
+}
+/* just some content with arbitrary styles for explanation purposes */
+.modal {
+	background-image:url("../img/noise.jpg");
+    max-width: 300px;
+    min-height: 200px;
+    line-height: 2;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 11; /* 1px higher than the overlay layer */
+}
+}
 .bel-line {
   height: 20px;
   width: 100%;

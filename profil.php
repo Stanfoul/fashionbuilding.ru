@@ -1,23 +1,39 @@
 <?php
 require_once("main_php/conect.php");
-function alert($string)
-{
-    print '<script type="text/javascript">alert("' . $string . '");</script>';
+function filter($string){
+	$string=str_replace("<","",$string);
+	$string=str_replace("/","",$string);
+	$string=str_replace(">","",$string);
+	return $string;
 }
+$kick='1';
 if (isset($_COOKIE['id'])){
-	$query="SELECT hash FROM `log` WHERE user_id LIKE '".$_COOKIE['id']."' " ;
-	if($result=$mysqli->query($query)){
-		while($obj=$result->fetch_object()){
+	$id=$_COOKIE['id'];
+	$query="SELECT `hash` FROM `log` WHERE `user_id` LIKE '1'" ;
+	if($result = $mysqli->query($query)) {
+		while($obj = $result->fetch_object()){
 			if((!hash_equals($obj->hash,$_COOKIE['h']))||(hash_equals($obj->hash,crypt($_SERVER['REMOTE_ADDR'],$obj->hash)))){
-				alert('successfull in');
-			}else{
-				header("Location:main_php/clear.php");
+				/*$query="SELECT * FROM `profile` WHERE user_id LIKE '".$id."' " ;
+				if($result=$mysqli->query($query)){
+					while($obj=$result->fetch_object()){
+						$name=filter($obj->name);
+						$lname=filter($obj->lname);
+						$email=filter($obj->email);
+						$phone='+7'.filter($obj->phone);
+
+					}
+				}*/
+				$kick='0';
 			}
 		}
 	}
 }
-if (isset($_POST['button1'])){
+if ((isset($_POST['button1']))||($kick=='1')){
 	header("Location:main_php/clear.php");
+}
+function alert($string)
+{
+    print '<script type="text/javascript">alert("' . $string . '");</script>';
 }
 ?>
 <!DOCTYPE html>
@@ -57,7 +73,7 @@ if (isset($_POST['button1'])){
                 </div>
                 </div>
             </div>
-                </li> 
+                </li>
             </ul>
         </nav>
     </div>
@@ -101,14 +117,14 @@ if (isset($_POST['button1'])){
                 <img src="img/cross.png" class="close">
                 <img src="img/mann.png" class="mann">
             </div>
-            
+
             <div class="add">
                 <a href="#">Добавить+</a>
             </div>
         </div>
     </div>
     <div class="int-mid">
-        <div class="poster"> 
+        <div class="poster">
             <div class="item">
                  <div class="left_part">
                         <p class="title">Участие в конкурсе<span><br>Вы не участвуете</span></p>
@@ -126,10 +142,27 @@ if (isset($_POST['button1'])){
             </div>
         </div>
     </div>
-     <div class="poster"> 
+	<div class="overlay" id="overlay" style="display:none;"></div>
+	<div class="modal" id="modal" style="display:none">
+		<span class="close" onclick="showred(0)">X</span>
+				<form method="POST">
+					<span class="form-group">
+					<input type="text" name="name" placeholder="Ваше Имя **"  value="<?php echo $name;?>"/>
+					<input type="text" name="lname" placeholder="Ваша Фамилия"  value="<?php echo $lname;?>"/>
+					<input type="text" name="town" placeholder="Город"  value="<?php echo $town;?>"/>
+					<input type="text"  id="phonee" name="phonee" placeholder="Телефон **"  value="<?php echo $phone2;?>"/>
+					<input type="text" id="email" name="email" placeholder="Электронная почта"  value="<?php echo $email;?>"/>
+					<br>
+					<br>
+					<button type="submit" class="button-form" name="button4">Соханить</button>
+					</span>
+				</form>
+				<br>
+	</div>
+     <div class="poster">
         <div class="left">
             <h1>Ваши данные</h1>
-            <a href="#">(Редектировать)</a>
+            <span onclick="showred(1)" class="button-link"><h3>Редактировать</h3></span>
             <p>Имя:Андрей Белый<br>Номер телефона:<span>Отсутствует!<br>Прияжите номер телефона для<br>получения электронных билетов<br> и смс уведомлений<br></span> E-mail:Отсутствует!<br>Привяжите для получения<br>уведомлений на электронную<br> почту!<br> Логин:97235987329845 <br>Пароль:0832058</p>
         </div>
         <div class="right">
@@ -139,5 +172,22 @@ if (isset($_POST['button1'])){
             <p>Я согласен(а) получать смс уведомления<br> от портала «FashionBuilding» раз в неделю</p>
         </div>
     </div>
-    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="js/jquery.inputmask.js"></script>
+    <script>
+	function showred(val){
+		if (val==1){
+			document.getElementById('modal').style.display="block";
+			document.getElementById('overlay').style.display="block";
+		}else{
+			document.getElementById('modal').style.display="none";
+			document.getElementById('overlay').style.display="none";
+		}
+	}
+	$(document).ready(function() {
+		$("#phonee").inputmask("+7(999)-999-99-99",{ "placeholder": "_" });
+   });
+	</script>
 </section>
+</body>
+</html>

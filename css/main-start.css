@@ -504,6 +504,7 @@ header.home-head li.personal .drop-down-log {
   top: 100%;
   left: -9990px;
   opacity: 0;
+  min-height:20px;
   transition: opacity 300ms ease-in-out; }
 
 header.home-head li.personal ul.personal-cab {
@@ -511,7 +512,7 @@ header.home-head li.personal ul.personal-cab {
   box-shadow: 0px 0px 0px 1px #dedede;
   width: 170px;
   background-color: #fff;
-  height: 150px;
+  min-height: 150px;
   padding: 10px;
   position: relative; }
   header.home-head li.personal ul.personal-cab .dropdown_arr {
@@ -562,7 +563,6 @@ header.home-head li.personal ul.personal-cab {
         cursor: pointer; }
     header.home-head li.personal ul.personal-cab li.soc i.mail {
       width: 17px;
-      height: 15px;
       padding-top: 1px;
       display: inline-block;
       background-size: contain;
