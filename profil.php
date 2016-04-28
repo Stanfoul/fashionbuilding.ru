@@ -1,28 +1,25 @@
 <?php
 require_once("main_php/conect.php");
-function filter($string){
-	$string=str_replace("<","",$string);
-	$string=str_replace("/","",$string);
-	$string=str_replace(">","",$string);
-	return $string;
-}
 $kick='1';
 if (isset($_COOKIE['id'])){
 	$id=$_COOKIE['id'];
-	$query="SELECT `hash` FROM `log` WHERE `user_id` LIKE '1'" ;
+	$query="SELECT `hash` FROM `log` WHERE `user_id` LIKE '".$id."'" ;
 	if($result = $mysqli->query($query)) {
 		while($obj = $result->fetch_object()){
 			if((!hash_equals($obj->hash,$_COOKIE['h']))||(hash_equals($obj->hash,crypt($_SERVER['REMOTE_ADDR'],$obj->hash)))){
-				/*$query="SELECT * FROM `profile` WHERE user_id LIKE '".$id."' " ;
+				$query="SELECT * FROM `profile` WHERE user_id LIKE '".$id."' " ;
 				if($result=$mysqli->query($query)){
 					while($obj=$result->fetch_object()){
 						$name=filter($obj->name);
-						$lname=filter($obj->lname);
-						$email=filter($obj->email);
-						$phone='+7'.filter($obj->phone);
-
+						$email=filter($obj->mail);
 					}
-				}*/
+				}
+				$query="SELECT * FROM `log` WHERE user_id LIKE '".$id."' " ;
+				if($result=$mysqli->query($query)){
+					while($obj=$result->fetch_object()){
+						$phone=filter($obj->login);
+					}
+				}
 				$kick='0';
 			}
 		}
@@ -31,9 +28,62 @@ if (isset($_COOKIE['id'])){
 if ((isset($_POST['button1']))||($kick=='1')){
 	header("Location:main_php/clear.php");
 }
-function alert($string)
-{
-    print '<script type="text/javascript">alert("' . $string . '");</script>';
+if (isset($_POST['button5'])){
+	if (($_POST['pass1']!="")&&($_POST['pass1']==$_POST['pass_check'])){
+		$pass0=filter($_POST['pass0']);
+		$chk='0';
+		$query="SELECT `pass` FROM `log` WHERE `user_id` LIKE '".$id."'" ;
+		if($result = $mysqli->query($query)) {
+			while($obj = $result->fetch_object()){
+				if(hash_equals($obj->pass, crypt($pass0, $obj->pass))){
+					$chk='1';
+				}
+			}
+		}
+		if ($chk=='1'){
+		$pass1= filter($_POST['pass1']);
+		$pass1 = crypt($pass1,gen_salt());
+		if(!$mysqli->query("UPDATE `log` SET `pass`='{$pass1}' WHERE `log`.`user_id` ='{$id}'")){
+			print "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
+		}
+	}else{
+		alert("Неверный старый пароль");
+		}
+	}else{
+		alert("Пароли не совпадают или не все данные введены");
+	}
+}
+if (isset($_POST['button4'])){
+	if (($_POST['name']!="")&&($_POST['phone']!="")&&($_POST['email']!="")){
+	$brk='0';
+	$name=filter($_POST['name']);
+	$phone=filter($_POST['phone']);
+	$email=filter($_POST['email']);
+	$phone = preg_replace('/[^0-9]/', '', $phone);
+	$phone = substr($phone,1);
+	$query=("SELECT * FROM `profile` WHERE user_id LIKE '".$id."'");
+	if($result=$mysqli->query($query)){
+		while($obj=$result->fetch_object()){
+			if($obj->user_id==$id){
+				$brk='1';
+				if(!$mysqli->query("UPDATE `profile` SET `name`='{$name}',`mail`=	'{$email}' WHERE `profile`.`user_id` ='{$id}'")){
+					print "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
+				}
+				if(!$mysqli->query("UPDATE `log` SET `login`='{$phone}' WHERE `log`.`user_id` ='{$id}'")){
+					print "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
+				}
+			}
+		}
+	}
+	if($brk=='0'){
+		if(!$mysqli->query("CREATE TABLE IF NOT EXISTS profile(user_id INT, name TEXT,mail TEXT,contest BOOLEAN)") ||
+		!$mysqli->query("INSERT INTO profile VALUES('{$id}', '{$name}' , '{$email}' , '0' )")) {
+		print "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
+			}
+	}
+}else{
+	alert("Введите все данные");
+}
 }
 ?>
 <!DOCTYPE html>
@@ -61,7 +111,7 @@ function alert($string)
             <div class="peppol">
                 <img src="img/icon-people.png">
             </div>
-            <div class="logo"><a href="index.php"><img src="img/logo.png" alt="fashion"></a></div>
+            <div class="logo"><a href=""><img src="img/logo.png" alt="fashion"></a></div>
             <ul class="message">
                 <li class="prigl"><a class="mb" href="#">Приглашения (<span class="count">0</span>)</a>
                 <div class="locpr">
@@ -143,14 +193,12 @@ function alert($string)
         </div>
     </div>
 	<div class="overlay" id="overlay" style="display:none;"></div>
-	<div class="modal" id="modal" style="display:none">
+	<div class="modal" id="red" style="display:none">
 		<span class="close" onclick="showred(0)">X</span>
 				<form method="POST">
 					<span class="form-group">
 					<input type="text" name="name" placeholder="Ваше Имя **"  value="<?php echo $name;?>"/>
-					<input type="text" name="lname" placeholder="Ваша Фамилия"  value="<?php echo $lname;?>"/>
-					<input type="text" name="town" placeholder="Город"  value="<?php echo $town;?>"/>
-					<input type="text"  id="phonee" name="phonee" placeholder="Телефон **"  value="<?php echo $phone2;?>"/>
+					<input type="text"  id="phonee" name="phone" placeholder="Телефон **"  value="<?php echo $phone;?>"/>
 					<input type="text" id="email" name="email" placeholder="Электронная почта"  value="<?php echo $email;?>"/>
 					<br>
 					<br>
@@ -159,17 +207,31 @@ function alert($string)
 				</form>
 				<br>
 	</div>
+	<div class="modal" id="passs" style="display:none">
+		<span class="close" onclick="showred(2)">X</span>
+				<form method="POST">
+					<span class="form-group">
+						<input type="password" id="pass" name="pass0" placeholder="Старый пароль">
+						<input type="password" id="pass" name="pass1" placeholder="Новый пароль">
+						<input type="password" id="pass" name="pass_check" placeholder="Повторите пароль">
+					<br>
+					<br>
+					<button type="submit" class="button-form" name="button5">Соханить</button>
+					</span>
+				</form>
+				<br>
+	</div>
      <div class="poster">
         <div class="left">
             <h1>Ваши данные</h1>
             <span onclick="showred(1)" class="button-link"><h3>Редактировать</h3></span>
-            <p>Имя:Андрей Белый<br>Номер телефона:<span>Отсутствует!<br>Прияжите номер телефона для<br>получения электронных билетов<br> и смс уведомлений<br></span> E-mail:Отсутствует!<br>Привяжите для получения<br>уведомлений на электронную<br> почту!<br> Логин:97235987329845 <br>Пароль:0832058</p>
+            <p>Имя:<?php echo $name;?><br>Номер телефона:<?php echo phonable($phone)?><span style="display:none">Отсутствует!<br>Прияжите номер телефона для<br>получения электронных билетов<br> и смс уведомлений<br></span><br> E-mail:<?php echo $email?><span style="display:none">Отсутствует!<br>Привяжите для получения<br>уведомлений на электронную<br> почту! </span><br>Пароль:<button onclick="showred(3);">Сменить пароль</button><br><a href="main_php/clear.php"><h3>Выход</h3></span></p>
         </div>
         <div class="right">
             <h1>Привязать аккаунты из соц сете<br>для быстрого входа</h1>
             <a href="#">Тут логотипы соц сетей</a>
             <h2>Найстройка уведомлений</h2>
-            <p>Я согласен(а) получать смс уведомления<br> от портала «FashionBuilding» раз в неделю</p>
+            <p><input type="checkbox"/>  Я согласен(а) получать смс уведомления<br> от портала «FashionBuilding» раз в неделю</p>
         </div>
     </div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -177,10 +239,16 @@ function alert($string)
     <script>
 	function showred(val){
 		if (val==1){
-			document.getElementById('modal').style.display="block";
+			document.getElementById('red').style.display="block";
+			document.getElementById('overlay').style.display="block";
+		}else if (val==0){
+			document.getElementById('red').style.display="none";
+			document.getElementById('overlay').style.display="none";
+		}else if(val==3){
+			document.getElementById('passs').style.display="block";
 			document.getElementById('overlay').style.display="block";
 		}else{
-			document.getElementById('modal').style.display="none";
+			document.getElementById('passs').style.display="none";
 			document.getElementById('overlay').style.display="none";
 		}
 	}

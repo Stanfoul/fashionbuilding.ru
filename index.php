@@ -1,43 +1,20 @@
 <?php
 	require_once("main_php/conect.php"); //ПОДКЛЮЧЕННИЕ БАЗЫ
-	function alert($string)
-{
-    print '<script type="text/javascript">alert("' . $string . '");</script>';
-}
-function gen_salt(){  //ФУНКЦИЯ ГЕНЕРАЦИИ СОЛИ ДЛЯ ШИФРОВАНИЯ ПАРОЛЯ
-	$salt='';
-	$symbols='0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-	for ($i=0;$i<8;$i++){
-		$salt=$salt.substr($symbols,rand(0,61),1);
-	}
-	$salt='$1$'.$salt.'$';
-	return $salt;
-}
-function gen_hash(){ //ФУНКЦИЯ ГЕНЕРАЦИИ ХЭША
-	$salt='';
-	$symbols='0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-	for ($i=0;$i<8;$i++){
-		$salt=$salt.substr($symbols,rand(0,61),1);
-	}
-	$salt='$1$'.$salt.'$';
-	$hash=$_SERVER['REMOTE_ADDR'];
-	$hash=crypt($hash,$salt);
-	return $hash;
-}
 if(isset($_POST['button0'])){ //ПО КНОПКЕ ВОЙТИ
 if(($_POST['login']!="")&&($_POST['pass']!="")){
 	$on='0';
-	$pass=$_POST['pass'];
-	$login=$_POST['login'];
+	$pass=filter($_POST['pass']);
+	$login=filter($_POST['login']);
+	$login = preg_replace('/[^0-9]/', '', $login);
+	$login = substr($login,1);
 	$query=("SELECT * FROM `log` WHERE login LIKE '".$login."'");
 	$hash=gen_hash();
 	if($result=$mysqli->query($query)){
 		while($obj=$result->fetch_object()){
-			if (($obj->login==$_POST['login'])&&(hash_equals($obj->pass, crypt($pass, $obj->pass)))){
+			if (($obj->login==$login)&&(hash_equals($obj->pass, crypt($pass, $obj->pass)))){
 				if(!$mysqli->query("UPDATE `log` SET `hash`='{$hash}' WHERE `log`.`login` ='{$login}'")){
 					print "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
 				}
-				alert('in');
 				setcookie("id",$obj->user_id);
 				setcookie("h",$hash);
 				header("Location:profil.php");
@@ -74,8 +51,10 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 		}
 		if ($_POST['pass1']==$_POST['pass_check']){
 			$brik='1';
-			$login1=$_POST['login1'];
-			$pass1=$_POST['pass1'];
+			$login1=filter($_POST['login1']);
+			$login1 = preg_replace('/[^0-9]/', '', $login1);
+			$login1 = substr($login1,1);
+			$pass1=filter($_POST['pass1']);
 			$pass1 = crypt($pass1,gen_salt());
 			$hash=gen_hash();
 			if(!$mysqli->query("CREATE TABLE IF NOT EXISTS log(user_id int NOT NULL AUTO_INCREMENT, login TEXT,pass TEXT,hash TEXT,grup TEXT , PRIMARY KEY (user_id))") ||
@@ -141,7 +120,7 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 				</li>
 			</ul>
 			<!-- LOGO START -->
-			<div class="logo"><a href="index.html"><img src="img/logo.png" alt="fashion"></a></div>
+			<div class="logo"><a href=""><img src="img/logo.png" alt="fashion"></a></div>
 			<!-- LOGO END -->
 			<ul>
 				<!-- Приглашения -->
@@ -155,7 +134,7 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 					     	</div>
 					    </div>
 					</div>
-				</li> 
+				</li>
 			</ul>
 		</nav>
 	</div>
@@ -181,22 +160,22 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 					</div>
 					<div class="thumb n3" style="background-image: url(img/woom.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
-					</div>	
+					</div>
 					<div class="thumb n4" style="background-image: url(img/woom.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
-					</div>	
+					</div>
 					<div class="thumb n5" style="background-image: url(img/woom.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
-					</div>	
+					</div>
 					<div class="thumb n6" style="background-image: url(img/woom.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
 					</div>
 					<div class="thumb n7" style="background-image: url(img/woom.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
-					</div>		
+					</div>
 					<div class="large-like"><i class="fa fa-heart"></i></div>
 				</div>
-			</div> 
+			</div>
 			<!-- Картинки девушек end -->
 			<!-- Картинки мужчин start -->
 			<div class="right-man-col">
@@ -211,19 +190,19 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 					</div>
 					<div class="thumb n3" style="background-image: url(img/man.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
-					</div>	
+					</div>
 					<div class="thumb n4" style="background-image: url(img/man.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
-					</div>	
+					</div>
 					<div class="thumb n5" style="background-image: url(img/man.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
-					</div>	
+					</div>
 					<div class="thumb n6" style="background-image: url(img/man.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
 					</div>
 					<div class="thumb n7" style="background-image: url(img/man.jpg)">
 						<div class="like"><i class="fa fa-heart"></i></div>
-					</div>		
+					</div>
 					<div class="large-like"><i class="fa fa-heart"></i></div>
 				</div>
 			</div>
@@ -246,8 +225,8 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 	<div class="second-big-ttl">
 	<!-- Даты и Места проведения -->
 	<div class="second-bg-ttl"><span class="fst">Ознакомьтесь с датами</span> <span class="sec">и местами проведения мероприятий :</span></div>
-</div> 
-	<div class="container"> 
+</div>
+	<div class="container">
 		<div class="block-date">
 			<div class="date-t"><span>2016</span> Март 12 пятница</div>
 			<div class="date-line">
@@ -276,7 +255,7 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 					<li><span class="day">Пн</span><span class="numb">22</span></li>
 				</ul>
 				<!-- стрелочки влево, вправо -->
-				<div class="left"></div> 
+				<div class="left"></div>
 				<div class="right"></div>
 				<!-- стрелочки влево, вправо -->
 			</div>
@@ -312,7 +291,7 @@ if(isset($_POST['button1'])){ //ПО КНОПКЕ ЗАРЕГИСТРИРОВАТ
 						<div class="buynow">Приобрести</div>
 				</div>
 				<div class="oplatit">
-					<div class="main-opl"> 
+					<div class="main-opl">
 						<div class="stoim">Стоимость билета:</div>
 						<span class="lp">600р.</span>
 						<span class="np">400р.</span>
